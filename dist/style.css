@@ -3,10 +3,18 @@
     margin: 0;
 }
 
+:root {
+    --distance: 50px;
+}
+
+body {
+    background-color: #222222;
+}
+
 header {
     width: 100vw;
     height: 100px;
-    background-color: #444444;
+    background-color: #666666;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,8 +22,7 @@ header {
 }
 
 main {
-    background-color: #222222;
-    height: calc(100vh - 100px);
+    height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,14 +30,68 @@ main {
 
 .menu {
     width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.menu-title {
+    width: 300px;
     height: 50px;
     background-color: #ddbbff;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: inset 0 2px 5px #22222240;
+    border-radius: 5px 5px 10px 10px;
+}
+
+.fade-in {
+    animation: fade-in 500ms ease-out 100ms forwards;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-out {
+    animation: fade-out 500ms ease-in forwards;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
 .menu-item {
     list-style: none;
-    display: none;
+    width: 300px;
+    height: 50px;
+    padding-top: 10px;
+    background-color: #bb99dd;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px #22222240;
+    display: flex;
+    transition: transform 1s;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 0 0 10px 10px;
+    opacity: 0;
+}
+
+.visible {
+    display: flex;
 }
