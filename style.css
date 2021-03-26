@@ -1,0 +1,36 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    width: 100vw;
+    height: 100px;
+    background-color: #444444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+}
+
+main {
+    background-color: #222222;
+    height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu {
+    width: 300px;
+    height: 50px;
+    background-color: #ddbbff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-item {
+    list-style: none;
+    display: none;
+}
