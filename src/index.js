@@ -8,15 +8,13 @@ function toggleClass(el, cls) {
 
 class MenuItem {
     constructor(el, name, index) {
+        this.el = el;
         this.name = name;
         this.index = index;
-        this.el = el;
         this.height = parseInt(window.getComputedStyle(el).height);
         this.distanceFromTop = this.height * (this.index + 1);
-        this.zIndex;
     }
     toggleDisplay(isVisible) {
-        console.log(isVisible);
         if (isVisible) {
             this.hide();
         } else {
@@ -44,11 +42,25 @@ class MenuItem {
 }
 
 class Menu {
-    constructor(titleEl, itemsArray) {
+    constructor(titleEl, colorMode, itemsArray) {
         this.items = itemsArray || [];
         this.titleEl = titleEl;
         this.titleEl.addEventListener('click', () => this.toggleMenuItems());
+        this._colorMode = colorMode;
         this.itemsVisible = false;
+    }
+    get colorMode() {
+        return this._colorMode;
+    }
+    set colorMode(mode) {
+        // Remove spaces and standardize case of string.
+        const uniformMode = mode.replace(/[\W_]/g, '').toLowerCase();
+        if (uniformMode !== 'monochrome' && uniformMode !== 'hues') {
+            alert('Invalid color mode. Please choose "monochrome" or "hues".');
+            return;
+        } else {
+            this._colorMode = uniformMode;
+        }
     }
     setZIndices() {
         let z = this.items.length;
@@ -58,9 +70,27 @@ class Menu {
             z--;
         });
     }
+    setFilters() {
+        if (this.colorMode === 'monochrome') {
+            let bright = 0.9;
+            let sat = 1.1;
+            for (let i = 0; i < this.items.length; i++) {
+                this.items[i].el.style.filter =
+                    `brightness(${bright}) ` + `saturate(${sat})`;
+                bright -= 0.1;
+                sat += 0.1;
+            }
+        } else if (this.colorMode === 'hues') {
+            let n = 45;
+            for (let i = 0; i < this.items.length; i++) {
+                this.items[i].el.style.filter = `hue-rotate(${n}deg)`;
+                n += 45;
+            }
+        } else {
+            console.log('Please set a color mode.');
+        }
+    }
     toggleMenuItems() {
-        console.log(this);
-        console.log(this.items);
         this.items.forEach((item) => {
             item.toggleDisplay(this.itemsVisible);
         });
@@ -68,13 +98,16 @@ class Menu {
     }
 }
 
+// Store all instances of menu class.
 const allMenus = document.querySelectorAll('.menu');
 
 allMenus.forEach((menuEl) => {
     const title = menuEl.querySelector('.menu-title');
-    const menu = new Menu(title);
+    // Create objects for each menu.
+    const menu = new Menu(title, 'hues');
     const items = [...menuEl.querySelectorAll('.menu-item')];
     items.forEach((itemEl) => {
+        // Create objects for each menu item.
         const item = new MenuItem(
             itemEl,
             itemEl.textContent,
@@ -82,5 +115,7 @@ allMenus.forEach((menuEl) => {
         );
         menu.items.push(item);
     });
+    // Set the z index style for each item.
     menu.setZIndices();
+    menu.setFilters();
 });
