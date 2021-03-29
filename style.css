@@ -45,10 +45,12 @@ main {
     justify-content: center;
     box-shadow: 0 2px 5px #22222240;
     border-radius: 5px 5px 10px 10px;
+    transition: transform 200ms ease-in-out;
 }
 
 .menu-title:hover {
     cursor: pointer;
+    transform: scale(1.02);
 }
 
 .fade-in {
@@ -87,7 +89,7 @@ main {
     justify-content: center;
     box-shadow: 0 2px 5px #22222240;
     display: flex;
-    transition: transform 1s;
+    transition: transform 1s, color 300ms ease-in-out;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -95,6 +97,7 @@ main {
     opacity: 0;
 }
 
-.visible {
-    display: flex;
+.menu-item:hover {
+    cursor: pointer;
+    color: white;
 }
