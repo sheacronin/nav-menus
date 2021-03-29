@@ -10,6 +10,7 @@
 
 body {
     background-color: #222222;
+    width: 100vw;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
 }
@@ -25,8 +26,9 @@ header {
 }
 
 main {
-    height: 50vh;
+    height: 70vh;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
 }
@@ -37,6 +39,9 @@ main {
 }
 
 .menu-title {
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
     width: 300px;
     height: 50px;
     background-color: var(--base-color);
@@ -100,4 +105,29 @@ main {
 .menu-item:hover {
     cursor: pointer;
     color: white;
+}
+
+.mobile-menu {
+    position: fixed;
+    bottom: 0;
+    height: 80px;
+    width: 100vw;
+    background-color: var(--base-color);
+    display: flex;
+    overflow-x: scroll;
+}
+
+.mobile-menu ul {
+    display: flex;
+    flex: 0 0 auto;
+}
+
+.mobile-menu-item {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 150px;
+    border-radius: 0;
 }
