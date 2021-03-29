@@ -1,26 +1,26 @@
 {
-  "name": "nav-menus",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sheacronin/nav-menus.git"
-  },
-  "author": "Shea Cronin <shealcronin@gmail.com>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sheacronin/nav-menus/issues"
-  },
-  "homepage": "https://github.com/sheacronin/nav-menus#readme",
-  "devDependencies": {
-    "eslint": "^7.22.0",
-    "eslint-config-prettier": "^8.1.0",
-    "prettier": "2.2.1",
-    "webpack": "^5.28.0",
-    "webpack-cli": "^4.5.0"
-  }
+    "name": "nav-menus",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sheacronin/nav-menus.git"
+    },
+    "author": "Shea Cronin <shealcronin@gmail.com> (https://sheacronin.github.io/)",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/sheacronin/nav-menus/issues"
+    },
+    "homepage": "https://github.com/sheacronin/nav-menus#readme",
+    "devDependencies": {
+        "eslint": "^7.22.0",
+        "eslint-config-prettier": "^8.1.0",
+        "prettier": "2.2.1",
+        "webpack": "^5.28.0",
+        "webpack-cli": "^4.5.0"
+    }
 }
