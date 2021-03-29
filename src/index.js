@@ -11,8 +11,14 @@ class MenuItem {
         this.el = el;
         this.name = name;
         this.index = index;
-        this.height = parseInt(window.getComputedStyle(el).height);
-        this.distanceFromTop = this.height * (this.index + 1);
+        this.measuredDimension = 'height';
+        this._distanceFromStart;
+    }
+    get distanceFromStart() {
+        const measurement = parseInt(
+            window.getComputedStyle(this.el)[this.measuredDimension]
+        );
+        return measurement * (this.index + 1);
     }
     toggleDisplay(isVisible) {
         if (isVisible) {
@@ -23,7 +29,7 @@ class MenuItem {
         this.triggerFade();
     }
     show() {
-        this.el.style.transform = `translate(0, ${this.distanceFromTop}px)`;
+        this.el.style.transform = `translate(0, ${this.distanceFromStart}px)`;
     }
     hide() {
         this.el.style.transform = 'translate(0, 0)';
@@ -38,6 +44,16 @@ class MenuItem {
             toggleClass(this.el, 'fade-in');
             toggleClass(this.el, 'fade-out');
         }
+    }
+}
+
+class MobileMenuItem extends MenuItem {
+    constructor(el, name, index) {
+        super(el, name, index);
+        this.measuredDimension = 'width';
+    }
+    show() {
+        this.el.style.transform = `translate(${this.distanceFromStart}px, 0)`;
     }
 }
 
@@ -108,11 +124,15 @@ allMenus.forEach((menuEl) => {
     const items = [...menuEl.querySelectorAll('.menu-item')];
     items.forEach((itemEl) => {
         // Create objects for each menu item.
-        const item = new MenuItem(
+        const ItemClass = itemEl.classList.contains('mobile-menu-item')
+            ? MobileMenuItem
+            : MenuItem;
+        const item = new ItemClass(
             itemEl,
             itemEl.textContent,
             items.indexOf(itemEl)
         );
+        console.log(item);
         menu.items.push(item);
     });
     // Set the z index style for each item.
