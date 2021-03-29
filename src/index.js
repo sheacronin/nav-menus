@@ -1,11 +1,3 @@
-const menuTitle = document.querySelector('.menu-title');
-const menuItems = document.querySelectorAll('.menu-item');
-
-const root = document.documentElement;
-root.style.setProperty('--distance', '50px');
-
-let menuItemsVisible = false;
-
 // Fn to toggle class.
 function toggleClass(el, cls) {
     // Decide if complete class needs to be removed or added.
@@ -14,40 +6,81 @@ function toggleClass(el, cls) {
     el.classList[action](cls);
 }
 
-(function setZIndices() {
-    let z = menuItems.length;
-    menuTitle.style.zIndex = z + 1;
-    menuItems.forEach((item) => {
-        item.style.zIndex = z;
-        z--;
-    });
-})();
-
-function triggerFade(item) {
-    if (
-        !item.classList.contains('fade-in') &&
-        !item.classList.contains('fade-out')
-    ) {
-        item.classList.add('fade-in');
-    } else {
-        toggleClass(item, 'fade-in');
-        toggleClass(item, 'fade-out');
+class MenuItem {
+    constructor(el, name, index) {
+        this.name = name;
+        this.index = index;
+        this.el = el;
+        this.height = parseInt(window.getComputedStyle(el).height);
+        this.distanceFromTop = this.height * (this.index + 1);
+        this.zIndex;
+    }
+    toggleDisplay(isVisible) {
+        console.log(isVisible);
+        if (isVisible) {
+            this.hide();
+        } else {
+            this.show();
+        }
+        this.triggerFade();
+    }
+    show() {
+        this.el.style.transform = `translate(0, ${this.distanceFromTop}px)`;
+    }
+    hide() {
+        this.el.style.transform = 'translate(0, 0)';
+    }
+    triggerFade() {
+        if (
+            !this.el.classList.contains('fade-in') &&
+            !this.el.classList.contains('fade-out')
+        ) {
+            this.el.classList.add('fade-in');
+        } else {
+            toggleClass(this.el, 'fade-in');
+            toggleClass(this.el, 'fade-out');
+        }
     }
 }
 
-function toggleMenuItems() {
-    let distance = 50;
-
-    menuItems.forEach((item) => {
-        if (menuItemsVisible) {
-            item.style.transform = 'translate(0, 0)';
-        } else {
-            item.style.transform = `translate(0, ${distance}px)`;
-            distance += 50;
-        }
-        triggerFade(item);
-    });
-    menuItemsVisible = !menuItemsVisible;
+class Menu {
+    constructor(titleEl, itemsArray) {
+        this.items = itemsArray || [];
+        this.titleEl = titleEl;
+        this.titleEl.addEventListener('click', () => this.toggleMenuItems());
+        this.itemsVisible = false;
+    }
+    setZIndices() {
+        let z = this.items.length;
+        this.titleEl.style.zIndex = z + 1;
+        this.items.forEach((item) => {
+            item.el.style.zIndex = z;
+            z--;
+        });
+    }
+    toggleMenuItems() {
+        console.log(this);
+        console.log(this.items);
+        this.items.forEach((item) => {
+            item.toggleDisplay(this.itemsVisible);
+        });
+        this.itemsVisible = !this.itemsVisible;
+    }
 }
 
-menuTitle.addEventListener('click', toggleMenuItems);
+const allMenus = document.querySelectorAll('.menu');
+
+allMenus.forEach((menuEl) => {
+    const title = menuEl.querySelector('.menu-title');
+    const menu = new Menu(title);
+    const items = [...menuEl.querySelectorAll('.menu-item')];
+    items.forEach((itemEl) => {
+        const item = new MenuItem(
+            itemEl,
+            itemEl.textContent,
+            items.indexOf(itemEl)
+        );
+        menu.items.push(item);
+    });
+    menu.setZIndices();
+});
