@@ -38,6 +38,4 @@ function createMenus(baseColor, colorMode = 'hues') {
     return menus;
 }
 
-createMenus('lightBlue', 'monochrome');
-
 export { createMenus };
