@@ -1,4 +1,5 @@
 import { MenuItem, MobileMenuItem, Menu } from './nav-menus';
+import '../dist/style.css';
 
 const menus = (function createMenus() {
     // Store all instances of menu class.
