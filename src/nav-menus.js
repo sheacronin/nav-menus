@@ -9,7 +9,6 @@ function toggleClass(el, cls) {
 function setBaseColor(color) {
     const root = document.documentElement;
     root.style.setProperty('--base-color', color);
-    console.log(root.style);
 }
 
 class MenuItem {
