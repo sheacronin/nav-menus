@@ -121,7 +121,8 @@ main {
     flex: 0 0 auto;
 }
 
-.mobile-menu-item {
+.mobile-menu .menu-item,
+.mobile-menu .menu-title {
     list-style: none;
     display: flex;
     align-items: center;
