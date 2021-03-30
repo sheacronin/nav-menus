@@ -1,0 +1,118 @@
+:root {
+    --base-color: #ddbbff;
+}
+
+.menu {
+    display: flex;
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+}
+
+.menu-title {
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    width: 300px;
+    height: 50px;
+    background-color: var(--base-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px #22222240;
+    border-radius: 5px 5px 10px 10px;
+    transition: transform 200ms ease-in-out;
+}
+
+.menu-title:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+.fade-in {
+    animation: fade-in 500ms ease-out 100ms forwards;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-out {
+    animation: fade-out 500ms ease-in forwards;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.menu-item {
+    list-style: none;
+    width: 300px;
+    height: 50px;
+    padding-top: 10px;
+    background-color: var(--base-color);
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px #22222240;
+    display: flex;
+    transition: transform 1s;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 0 0 10px 10px;
+    opacity: 0;
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: color 300ms ease-in-out;
+}
+
+.menu-item:hover a {
+    cursor: pointer;
+    color: white;
+}
+
+.mobile-menu {
+    position: fixed;
+    bottom: 0;
+    height: 80px;
+    width: 100vw;
+    background-color: var(--base-color);
+    display: flex;
+    overflow-x: scroll;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+}
+
+.mobile-menu ul {
+    display: flex;
+    flex: 0 0 auto;
+}
+
+.mobile-menu .menu-item,
+.mobile-menu .menu-title {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 150px;
+    border-radius: 0;
+}
