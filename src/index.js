@@ -1,7 +1,7 @@
-import { MenuItem, MobileMenuItem, Menu } from './nav-menus';
+import { MenuItem, MobileMenuItem, Menu, setBaseColor } from './nav-menus';
 import './nav-menus.css';
 
-const menus = (function createMenus() {
+function createMenus(baseColor, colorMode = 'hues') {
     // Store all instances of menu class.
     const menuElements = document.querySelectorAll('.menu, .mobile-menu');
 
@@ -12,7 +12,7 @@ const menus = (function createMenus() {
         // Create objects for each menu.
         // The second parameter in the constructor takes 'hues' or 'monochrome'
         // as an argument for the menu's color mode.
-        const menu = new Menu(title, 'hues');
+        const menu = new Menu(title, colorMode);
         // Create objects for each menu item.
         const ItemClass = menuEl.classList.contains('mobile-menu')
             ? MobileMenuItem
@@ -32,7 +32,12 @@ const menus = (function createMenus() {
         // Push each menu object into the menus array to be returned.
         menus.push(menu);
     });
-    return menus;
-})();
 
-export { menus };
+    if (baseColor) setBaseColor(baseColor);
+
+    return menus;
+}
+
+createMenus('lightBlue', 'monochrome');
+
+export { createMenus };

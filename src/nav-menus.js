@@ -6,6 +6,12 @@ function toggleClass(el, cls) {
     el.classList[action](cls);
 }
 
+function setBaseColor(color) {
+    const root = document.documentElement;
+    root.style.setProperty('--base-color', color);
+    console.log(root.style);
+}
+
 class MenuItem {
     constructor(el, name, index) {
         this.el = el;
@@ -114,4 +120,4 @@ class Menu {
     }
 }
 
-export { MenuItem, MobileMenuItem, Menu };
+export { MenuItem, MobileMenuItem, Menu, setBaseColor };
