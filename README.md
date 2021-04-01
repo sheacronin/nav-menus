@@ -12,6 +12,8 @@ Install the npm package in the command line:
 npm install nav-menus
 ```
 
+Webpack should be configured to use `css-loader` and `style-loader`.
+
 ### Your HTML
 
 Use the following class names for elements you wish to include in your navigation menus.
@@ -52,7 +54,6 @@ Import and run the `createMenus` function in JavaScript.
 
 ```javascript
 import { createMenus } from 'nav-menus';
-// createMenus takes two optional parameters: baseColor and colorMode.
 createMenus();
 ```
 
