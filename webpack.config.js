@@ -6,7 +6,11 @@ module.exports = {
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist'),
-        library: 'NavMenus',
+        library: {
+            name: 'NavMenus',
+            type: 'umd',
+            umdNamedDefine: true,
+        },
     },
     module: {
         rules: [
